@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# StoryNest
 
-## Getting Started
+StoryNest is a mobile-first web app that captures life stories through guided digital interviews and generates beautiful AI-assisted biographies.
 
-First, run the development server:
+Built for the **Execute AI Genesis 2025** hackathon.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Mobile-first design
+- Guided interview with 50+ questions
+- Optional speech-to-text answers
+- AI-generated short biography
+- Easy preview and download
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Technologies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js 15 (Turbopack)
+- TailwindCSS 4
+- Node.js 20, npm 10
 
-## Learn More
+## Current Status
 
-To learn more about Next.js, take a look at the following resources:
+- Basic interview flow working
+- Mobile testing underway
+- AI text generation integration in progress
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Every life deserves to be told.*
