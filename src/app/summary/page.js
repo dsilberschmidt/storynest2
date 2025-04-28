@@ -2,11 +2,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Summary() {
   const [answers, setAnswers] = useState([]);
   const [bio, setBio] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const savedAnswers = JSON.parse(sessionStorage.getItem('storynest_answers')) || [];
@@ -51,6 +53,15 @@ export default function Summary() {
           <h2 className="text-2xl font-semibold mb-4">Your Story</h2>
           <p className="whitespace-pre-line">{bio}</p>
         </div>
+      )}
+
+      {bio && (
+        <button
+          onClick={() => router.push('/')}
+          className="mt-6 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Back to Home
+        </button>
       )}
     </main>
   );
