@@ -88,47 +88,43 @@ export default function Summary() {
         <button
           onClick={generateBiography}
           disabled={loading}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6"
         >
           {loading ? 'Generating...' : 'Generate my Story ✨'}
         </button>
       )}
 
-      {(bio || error) && (
-        <>
-          {bio && (
-            <div className="mt-8 p-6 border rounded shadow w-full max-w-2xl bg-gray-50 overflow-auto" style={{ maxHeight: '800px' }}>
-              <h2 className="text-2xl font-semibold mb-4">Your Story</h2>
-              <p className="whitespace-pre-line">{bio}</p>
-            </div>
-          )}
-
-          {error && (
-            <div className="mt-8 text-red-500 font-bold">
-              {error}
-            </div>
-          )}
-
-          <div className="flex gap-4 mt-6">
-            <button
-              onClick={() => router.push('/interview?edit=true')}
-              className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
-            >
-              ✏️ Edit My Answers
-            </button>
-
-            <button
-              onClick={() => {
-                sessionStorage.clear();
-                router.push('/');
-              }}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            >
-              🆕 Start Over
-            </button>
-          </div>
-        </>
+      {bio && (
+        <div className="mt-8 p-6 border rounded shadow w-full max-w-2xl bg-gray-50 overflow-y-auto" style={{ minHeight: '300px' }}>
+          <h2 className="text-2xl font-semibold mb-4">Your Story</h2>
+          <p className="whitespace-pre-line">{bio}</p>
+        </div>
       )}
+
+      {error && (
+        <div className="mt-8 text-red-500 font-bold">
+          {error}
+        </div>
+      )}
+
+      <div className="flex gap-4 mt-6">
+        <button
+          onClick={() => router.push('/interview?edit=true')}
+          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+        >
+          ✏️ Edit My Answers
+        </button>
+
+        <button
+          onClick={() => {
+            sessionStorage.clear();
+            router.push('/');
+          }}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          🆕 Start Over
+        </button>
+      </div>
     </main>
   );
 }
