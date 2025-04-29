@@ -1,5 +1,6 @@
 
 const questions = [
+  "Hi! I'm Amanda, I work conducting interviews to create the biographies of interesting people. I'll ask you a few questions. How are you today? Would you like to share something about yourself to start?",
   "Where were you born?",
   "What was your house like when you were a child?",
   "What corner of your neighborhood do you remember fondly?",
@@ -18,7 +19,8 @@ const questions = [
   "Which older person did you admire as a child?",
   "What did you want to be when you grew up?",
   "If you could go back to one day of your childhood, which would it be?",
-  "What advice would you give to your inner child today?"
+  "What advice would you give to your inner child today?",
+  "Is there anything else you'd like to share or record in your story?"
 ];
 
 export default questions;

@@ -1,5 +1,6 @@
 
 const questions = [
+  "Oi! Eu sou Amanda, trabalho fazendo entrevistas para criar biografias de pessoas interessantes. Vou te fazer algumas perguntas. Como você está hoje? Gostaria de me contar algo sobre você para começar?",
   "Onde você nasceu?",
   "Como era a sua casa quando você era criança?",
   "Qual cantinho do seu bairro você lembra com carinho?",
@@ -18,7 +19,8 @@ const questions = [
   "Qual pessoa mais velha você admirava quando criança?",
   "O que você queria ser quando crescesse?",
   "Se pudesse voltar a um dia da sua infância, qual seria?",
-  "Que conselho você daria hoje para a sua criança interior?"
+  "Que conselho você daria hoje para a sua criança interior?",
+  "Há algo mais que você gostaria de compartilhar ou deixar registrado na sua história?"
 ];
 
 export default questions;

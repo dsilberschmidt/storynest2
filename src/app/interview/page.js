@@ -16,6 +16,8 @@ export default function Interview() {
   const [lang, setLang] = useState('en');
   const router = useRouter();
 
+  const isTestMode = typeof window !== 'undefined' && sessionStorage.getItem('storynest_test') === 'true';
+
   useEffect(() => {
     const selectedLang = sessionStorage.getItem('storynest_language') || 'en';
     setLang(selectedLang);
@@ -46,6 +48,86 @@ export default function Interview() {
   const startNewInterview = () => {
     sessionStorage.removeItem('storynest_answers');
     router.push('/');
+  };
+
+  const loadSampleAnswers = () => {
+    let samples = [];
+    if (lang === 'es') {
+      samples = [
+        "Estoy muy bien, emocionado de comenzar.",
+        "Nací en Buenos Aires, Argentina.",
+        "Era una casa baja, con patio y un limonero enorme.",
+        "La placita de la esquina, llena de árboles y bancos viejos.",
+        "Santi, mi vecino de al lado.",
+        "Jugar a la pelota en la calle hasta que oscurecía.",
+        "Mi autito rojo y el metegol de casa.",
+        "Las empanadas caseras de mi abuela.",
+        "“De música ligera” de Soda Stereo.",
+        "Una tarde de picnic en el parque Centenario.",
+        "La cancha de Argentinos Juniors con mi papá.",
+        "Cuando nadé solo por primera vez en la pileta del club.",
+        "Mi mamá, quien me enseñó a no rendirme.",
+        "El olor a pasto recién cortado en verano.",
+        "Una vez me perdí en la feria y me encontró un policía.",
+        "Aprendí que compartir siempre hace todo mejor.",
+        "Admiraba mucho a mi abuelo, con su infinita paciencia.",
+        "Soñaba con ser bombero para ayudar a otros.",
+        "El día que recibí mi primera bicicleta.",
+        "“Nunca dejes de soñar ni de creer en ti.”",
+        "Gracias por esta entrevista, me hizo recordar momentos hermosos."
+      ];
+    } else if (lang === 'pt') {
+      samples = [
+        "Estou muito bem, animado para começar.",
+        "Nasci em Buenos Aires, Argentina.",
+        "Era uma casa baixa, com um quintal e um enorme limoeiro.",
+        "A pracinha da esquina, cheia de árvores e bancos antigos.",
+        "Santi, meu vizinho de porta.",
+        "Jogar bola na rua até escurecer.",
+        "Meu carrinho vermelho e a mesa de pebolim de casa.",
+        "As empanadas caseiras da minha avó.",
+        "“De música ligera” do Soda Stereo.",
+        "Um piquenique no Parque Centenário.",
+        "As visitas ao estádio do Argentinos Juniors com meu pai.",
+        "Quando nadei sozinho pela primeira vez na piscina do clube.",
+        "Minha mãe, que me ensinou a nunca desistir.",
+        "O cheiro de grama recém-cortada no verão.",
+        "Me perdi uma vez na feira e um policial me encontrou.",
+        "Aprendi que compartilhar sempre deixa tudo melhor.",
+        "Admirava muito meu avô, com sua paciência infinita.",
+        "Sonhava em ser bombeiro para ajudar as pessoas.",
+        "O dia em que ganhei minha primeira bicicleta.",
+        "Nunca pare de sonhar e acreditar em você mesmo.",
+        "Obrigado por esta entrevista, me fez relembrar momentos lindos."
+      ];
+    } else {
+      samples = [
+        "I'm doing great, excited to start.",
+        "I was born in Buenos Aires, Argentina.",
+        "It was a small house with a patio and a huge lemon tree.",
+        "The little square at the corner, full of old trees and benches.",
+        "Santi, my next-door neighbor.",
+        "Playing soccer on the street until it got dark.",
+        "My red toy car and the foosball table at home.",
+        "My grandmother’s homemade empanadas.",
+        "“De música ligera” by Soda Stereo.",
+        "A picnic afternoon at Centenario Park.",
+        "Argentinos Juniors' stadium visits with my dad.",
+        "When I swam alone for the first time at the club’s pool.",
+        "My mom, who taught me never to give up.",
+        "The smell of freshly cut grass in summer.",
+        "I got lost once at the fair and a policeman helped me.",
+        "I learned that sharing always makes everything better.",
+        "I admired my grandfather, with his endless patience.",
+        "I dreamed of becoming a firefighter to help others.",
+        "The day I got my first bicycle.",
+        "Never stop dreaming and believing in yourself.",
+        "Thank you for this interview, it brought back beautiful memories."
+      ];
+    }
+
+    sessionStorage.setItem('storynest_answers', JSON.stringify(samples));
+    router.push('/summary');
   };
 
   if (questions.length === 0) {
@@ -87,6 +169,15 @@ export default function Interview() {
       >
         {texts[lang].newInterview}
       </button>
+
+      {isTestMode && (
+        <button
+          onClick={loadSampleAnswers}
+          className="mt-4 text-xs underline text-green-600 hover:text-green-800"
+        >
+          {lang === 'es' ? 'Cargar respuestas de prueba' : lang === 'pt' ? 'Carregar respostas de teste' : 'Load sample answers'}
+        </button>
+      )}
     </main>
   );
 }
