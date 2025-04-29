@@ -80,29 +80,82 @@ export default function Interview() {
   };
 
   const loadSampleAnswers = () => {
-    sessionStorage.setItem('storynest_answers', JSON.stringify([
-      "Estoy muy bien, emocionado de comenzar.",
-      "Nací en Buenos Aires, Argentina.",
-      "Era una casa baja, con patio y un limonero enorme.",
-      "La placita de la esquina, llena de árboles y bancos viejos.",
-      "Santi, mi vecino de al lado.",
-      "Jugar a la pelota en la calle hasta que oscurecía.",
-      "Mi autito rojo y el metegol de casa.",
-      "Las empanadas caseras de mi abuela.",
-      "“De música ligera” de Soda Stereo.",
-      "Una tarde de picnic en el parque Centenario.",
-      "La cancha de Argentinos Juniors con mi papá.",
-      "Cuando nadé solo por primera vez en la pileta del club.",
-      "Mi mamá, quien me enseñó a no rendirme.",
-      "El olor a pasto recién cortado en verano.",
-      "Una vez me perdí en la feria y me encontró un policía.",
-      "Aprendí que compartir siempre hace todo mejor.",
-      "Admiraba mucho a mi abuelo, con su infinita paciencia.",
-      "Soñaba con ser bombero para ayudar a otros.",
-      "El día que recibí mi primera bicicleta.",
-      "“Nunca dejes de soñar ni de creer en ti.”",
-      "Gracias por esta entrevista, me hizo recordar momentos hermosos."
-    ]));
+    let samples = [];
+    if (lang === 'es') {
+      samples = [
+        "Estoy muy bien, emocionado de comenzar.",
+        "Nací en Buenos Aires, Argentina.",
+        "Era una casa baja, con patio y un limonero enorme.",
+        "La placita de la esquina, llena de árboles y bancos viejos.",
+        "Santi, mi vecino de al lado.",
+        "Jugar a la pelota en la calle hasta que oscurecía.",
+        "Mi autito rojo y el metegol de casa.",
+        "Las empanadas caseras de mi abuela.",
+        "“De música ligera” de Soda Stereo.",
+        "Una tarde de picnic en el parque Centenario.",
+        "La cancha de Argentinos Juniors con mi papá.",
+        "Cuando nadé solo por primera vez en la pileta del club.",
+        "Mi mamá, quien me enseñó a no rendirme.",
+        "El olor a pasto recién cortado en verano.",
+        "Una vez me perdí en la feria y me encontró un policía.",
+        "Aprendí que compartir siempre hace todo mejor.",
+        "Admiraba mucho a mi abuelo, con su infinita paciencia.",
+        "Soñaba con ser bombero para ayudar a otros.",
+        "El día que recibí mi primera bicicleta.",
+        "“Nunca dejes de soñar ni de creer en ti.”",
+        "Gracias por esta entrevista, me hizo recordar momentos hermosos."
+      ];
+    } else if (lang === 'en') {
+      samples = [
+        "I'm doing great, excited to start.",
+        "I was born in Buenos Aires, Argentina.",
+        "It was a small house with a patio and a huge lemon tree.",
+        "The little park at the corner, full of trees and old benches.",
+        "Santi, my next-door neighbor.",
+        "Playing soccer on the street until it got dark.",
+        "My red toy car and the foosball table at home.",
+        "My grandmother’s homemade empanadas.",
+        "“De música ligera” by Soda Stereo.",
+        "An afternoon picnic at Centenario Park.",
+        "Visiting the Argentinos Juniors stadium with my dad.",
+        "When I swam alone for the first time at the club pool.",
+        "My mom, who taught me never to give up.",
+        "The smell of freshly cut grass in summer.",
+        "I got lost once at the fair and a policeman found me.",
+        "I learned that sharing always makes everything better.",
+        "I admired my grandfather, with his infinite patience.",
+        "I dreamed of being a firefighter to help people.",
+        "The day I received my first bicycle.",
+        "“Never stop dreaming and believing in yourself.”",
+        "Thank you for this interview, it brought back beautiful memories."
+      ];
+    } else if (lang === 'pt') {
+      samples = [
+        "Estou muito bem, animado para começar.",
+        "Nasci em Buenos Aires, Argentina.",
+        "Era uma casa baixa, com um quintal e um grande limoeiro.",
+        "A pracinha da esquina, cheia de árvores e bancos antigos.",
+        "Santi, meu vizinho de porta.",
+        "Jogar futebol na rua até anoitecer.",
+        "Meu carrinho vermelho e a mesa de pebolim em casa.",
+        "As empanadas caseiras da minha avó.",
+        "“De música ligera” do Soda Stereo.",
+        "Uma tarde de piquenique no Parque Centenário.",
+        "Visitar o estádio do Argentinos Juniors com meu pai.",
+        "Quando nadei sozinho pela primeira vez na piscina do clube.",
+        "Minha mãe, que me ensinou a nunca desistir.",
+        "O cheiro de grama recém cortada no verão.",
+        "Uma vez me perdi na feira e um policial me encontrou.",
+        "Aprendi que compartilhar sempre torna tudo melhor.",
+        "Admirava muito meu avô, com sua paciência infinita.",
+        "Sonhava em ser bombeiro para ajudar as pessoas.",
+        "O dia em que ganhei minha primeira bicicleta.",
+        "“Nunca deixe de sonhar e acreditar em você mesmo.”",
+        "Obrigado por esta entrevista, trouxe lindas memórias."
+      ];
+    }
+
+    sessionStorage.setItem('storynest_answers', JSON.stringify(samples));
     router.push('/summary');
   };
 
