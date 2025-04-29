@@ -104,7 +104,7 @@ export default function Summary() {
               onClick={() => router.push('/interview')}
               className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
             >
-              🔙 Back to Interview
+              ✏️ Edit My Answers
             </button>
 
             <button
@@ -114,7 +114,7 @@ export default function Summary() {
               }}
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
-              🆕 Start New Interview
+              🆕 Start Over
             </button>
           </div>
         </>
