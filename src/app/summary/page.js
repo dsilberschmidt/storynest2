@@ -25,6 +25,14 @@ export default function Summary() {
     setBio('');
     setLoading(true);
     setError(null);
+
+    const nonEmptyAnswers = answers.filter(a => a.trim() !== '');
+    if (nonEmptyAnswers.length === 0) {
+      setLoading(false);
+      setError('Please answer at least one question before generating your story.');
+      return;
+    }
+
     try {
       const response = await fetch('https://api.aimlapi.com/v1/chat/completions', {
         method: 'POST',
@@ -41,7 +49,7 @@ export default function Summary() {
             },
             {
               role: 'user',
-              content: 'Here are my memories: ' + answers.join(' ')
+              content: 'Here are my memories: ' + nonEmptyAnswers.join(' ')
             }
           ]
         })
