@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import questionsES from '../../i18n/questions_es';
 import questionsEN from '../../i18n/questions_en';
 import questionsPT from '../../i18n/questions_pt';
@@ -15,6 +15,7 @@ export default function Interview() {
   const [questions, setQuestions] = useState([]);
   const [lang, setLang] = useState('en');
   const [isTestMode, setIsTestMode] = useState(false);
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   useEffect(() => {
@@ -27,6 +28,18 @@ export default function Interview() {
     const test = localStorage.getItem('storynest_test') === 'true';
     setIsTestMode(test);
   }, []);
+
+  useEffect(() => {
+    if (questions.length > 0) {
+      const isEditing = searchParams.get('edit') === 'true';
+      if (isEditing) {
+        const savedAnswers = JSON.parse(sessionStorage.getItem('storynest_answers')) || [];
+        setAnswers(savedAnswers.slice(0, -1)); // todas menos la actual
+        setInput(savedAnswers[savedAnswers.length - 1] || '');
+        setCurrentQuestion(savedAnswers.length - 1);
+      }
+    }
+  }, [questions, searchParams]);
 
   const handleNext = () => {
     setAnswers([...answers, input]);
