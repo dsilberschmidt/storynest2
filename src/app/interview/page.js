@@ -2,93 +2,57 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import questions from '../questions';
+import { useRouter } from 'next/navigation';
+import questionsES from '../../i18n/questions_es';
+import questionsEN from '../../i18n/questions_en';
+import questionsPT from '../../i18n/questions_pt';
 
 export default function Interview() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [input, setInput] = useState('');
+  const [questions, setQuestions] = useState([]);
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (!searchParams.get('edit')) {
-      sessionStorage.removeItem('storynest_answers');
-    } else {
-      const savedAnswers = JSON.parse(sessionStorage.getItem('storynest_answers')) || [];
-      setAnswers(savedAnswers);
-      setInput(savedAnswers[0] || '');
-    }
+    const lang = sessionStorage.getItem('storynest_language') || 'en';
+    if (lang === 'es') setQuestions(questionsES);
+    else if (lang === 'pt') setQuestions(questionsPT);
+    else setQuestions(questionsEN);
   }, []);
 
   const handleNext = () => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentQuestion] = input;
-    setAnswers(updatedAnswers);
+    setAnswers([...answers, input]);
     setInput('');
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-      setInput(updatedAnswers[currentQuestion + 1] || '');
     } else {
-      sessionStorage.setItem('storynest_answers', JSON.stringify(updatedAnswers));
+      sessionStorage.setItem('storynest_answers', JSON.stringify([...answers, input]));
       router.push('/summary');
     }
   };
 
-  const handleBack = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-      setInput(answers[currentQuestion - 1] || '');
-    }
-  };
+  if (questions.length === 0) {
+    return <main className="flex items-center justify-center min-h-screen">Loading...</main>;
+  }
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4">
       <h2 className="text-2xl font-semibold mb-6">{questions[currentQuestion]}</h2>
 
       <textarea
-        id="answer-input"
         className="border p-2 w-full max-w-md mb-4"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         rows={4}
-        placeholder="Write your answer here..."
+        placeholder="Escribe tu respuesta aquí..."
       />
 
-      <div className="flex gap-4 mb-4 flex-wrap justify-center">
-        <button
-          onClick={handleBack}
-          disabled={currentQuestion === 0}
-          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-        >
-          🔙 Back
-        </button>
-
-        <button
-          id="mic-button"
-          disabled
-          className="bg-gray-400 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"
-        >
-          🎙️ Voice Input Coming Soon
-        </button>
-
-        <button
-          onClick={handleNext}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {currentQuestion < questions.length - 1 ? 'Next' : 'Finish'}
-        </button>
-      </div>
-
       <button
-        onClick={() => {
-          sessionStorage.clear();
-          router.push('/');
-        }}
-        className="text-sm text-red-500 underline mt-4"
+        onClick={handleNext}
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
       >
-        🆕 Start New Interview
+        {currentQuestion < questions.length - 1 ? 'Next' : 'Finish'}
       </button>
     </main>
   );
