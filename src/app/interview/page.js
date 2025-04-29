@@ -35,13 +35,26 @@ export default function Interview() {
     }
   };
 
+  const handleBack = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+      setInput(answers[currentQuestion - 1] || '');
+      setAnswers(answers.slice(0, -1));
+    }
+  };
+
+  const startNewInterview = () => {
+    sessionStorage.removeItem('storynest_answers');
+    router.push('/');
+  };
+
   if (questions.length === 0) {
     return <main className="flex items-center justify-center min-h-screen">Loading...</main>;
   }
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h2 className="text-2xl font-semibold mb-6">{questions[currentQuestion]}</h2>
+    <main className="flex flex-col items-center justify-center min-h-screen p-4 space-y-4">
+      <h2 className="text-2xl font-semibold mb-6 text-center">{questions[currentQuestion]}</h2>
 
       <textarea
         className="border p-2 w-full max-w-md mb-4"
@@ -51,11 +64,28 @@ export default function Interview() {
         placeholder={texts[lang].writeHere}
       />
 
+      <div className="flex gap-4">
+        {currentQuestion > 0 && (
+          <button
+            onClick={handleBack}
+            className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+          >
+            {texts[lang].back}
+          </button>
+        )}
+        <button
+          onClick={handleNext}
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          {currentQuestion < questions.length - 1 ? texts[lang].next : texts[lang].finish}
+        </button>
+      </div>
+
       <button
-        onClick={handleNext}
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        onClick={startNewInterview}
+        className="mt-6 text-sm underline text-blue-500 hover:text-blue-700"
       >
-        {currentQuestion < questions.length - 1 ? texts[lang].next : texts[lang].finish}
+        {texts[lang].newInterview}
       </button>
     </main>
   );
