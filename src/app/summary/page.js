@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -84,11 +83,11 @@ export default function Summary() {
       <h1 className="text-3xl font-bold mb-6">{texts[lang].thankYou}</h1>
 
       {answers.length > 0 && questions.length > 0 && (
-        <div className="w-full max-w-md space-y-4 mb-6">
+        <div className="w-full max-w-md mb-6">
           {answers.map((answer, index) => (
-            <div key={index} className="p-4 border rounded shadow">
-              <h2 className="text-lg font-semibold mb-2">{questions[index]}</h2>
-              <p>{answer}</p>
+            <div key={index} className="mb-2">
+              <p className="italic ml-4">— {questions[index]}</p>
+              <p>— {answer}</p>
             </div>
           ))}
         </div>
