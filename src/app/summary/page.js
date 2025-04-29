@@ -3,25 +3,34 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import questions from '../questions';
+import questionsES from '../../i18n/questions_es';
+import questionsEN from '../../i18n/questions_en';
+import questionsPT from '../../i18n/questions_pt';
+import texts from '../../i18n/texts';
 
 export default function Summary() {
   const [answers, setAnswers] = useState([]);
   const [bio, setBio] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [lang, setLang] = useState('en');
+  const [questions, setQuestions] = useState([]);
   const router = useRouter();
 
   const apiKey = process.env.NEXT_PUBLIC_AIMLAPI_KEY;
 
   useEffect(() => {
+    const selectedLang = sessionStorage.getItem('storynest_language') || 'en';
+    setLang(selectedLang);
+    if (selectedLang === 'es') setQuestions(questionsES);
+    else if (selectedLang === 'pt') setQuestions(questionsPT);
+    else setQuestions(questionsEN);
+
     const savedAnswers = JSON.parse(sessionStorage.getItem('storynest_answers')) || [];
     setAnswers(savedAnswers);
   }, []);
 
   const generateBiography = async () => {
-    console.log('⏳ Empezando generación de biografía');
-    console.log('🔑 API Key:', apiKey ? '[ok]' : '[missing]');
     setBio('');
     setLoading(true);
     setError(null);
@@ -72,9 +81,9 @@ export default function Summary() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-3xl font-bold mb-6">Thank you for sharing your story!</h1>
+      <h1 className="text-3xl font-bold mb-6">{texts[lang].thankYou}</h1>
 
-      {answers.length > 0 && (
+      {answers.length > 0 && questions.length > 0 && (
         <div className="w-full max-w-md space-y-4 mb-6">
           {answers.map((answer, index) => (
             <div key={index} className="p-4 border rounded shadow">
@@ -91,13 +100,13 @@ export default function Summary() {
           disabled={loading}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6"
         >
-          {loading ? 'Generating...' : 'Generate my Story ✨'}
+          {loading ? 'Generating...' : texts[lang].generate}
         </button>
       )}
 
       {bio && (
         <div className="mt-8 p-6 border rounded shadow w-full max-w-2xl bg-gray-50">
-          <h2 className="text-2xl font-semibold mb-4">Your Story</h2>
+          <h2 className="text-2xl font-semibold mb-4">{texts[lang].yourStory}</h2>
           <p className="whitespace-pre-line">{bio}</p>
         </div>
       )}
@@ -113,7 +122,7 @@ export default function Summary() {
           onClick={() => router.push('/interview?edit=true')}
           className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
         >
-          ✏️ Edit My Answers
+          {texts[lang].edit}
         </button>
 
         <button
@@ -123,7 +132,7 @@ export default function Summary() {
           }}
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
-          🆕 Start Over
+          {texts[lang].startOver}
         </button>
       </div>
     </main>
