@@ -78,9 +78,40 @@ export default function Summary() {
     }
   };
 
+  const NavigationButtons = () => (
+    <div className="flex flex-col items-center mb-8">
+      <button
+        onClick={generateBiography}
+        disabled={loading}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded text-xl mb-4"
+      >
+        {loading ? 'Generating...' : texts[lang].generate}
+      </button>
+      <div className="flex gap-6 justify-center">
+        <span
+          onClick={() => router.push('/interview?edit=true')}
+          className="text-gray-600 underline hover:text-gray-800 cursor-pointer"
+        >
+          {texts[lang].edit}
+        </span>
+        <span
+          onClick={() => {
+            sessionStorage.clear();
+            router.push('/');
+          }}
+          className="text-gray-600 underline hover:text-gray-800 cursor-pointer"
+        >
+          {texts[lang].startOver}
+        </span>
+      </div>
+    </div>
+  );
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4">
       <h1 className="text-3xl font-bold mb-6">{texts[lang].thankYou}</h1>
+
+      <NavigationButtons />
 
       {answers.length > 0 && questions.length > 0 && (
         <div className="w-full max-w-md mb-6">
@@ -93,15 +124,7 @@ export default function Summary() {
         </div>
       )}
 
-      {!bio && !error && (
-        <button
-          onClick={generateBiography}
-          disabled={loading}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6"
-        >
-          {loading ? 'Generating...' : texts[lang].generate}
-        </button>
-      )}
+      <NavigationButtons />
 
       {bio && (
         <div className="mt-8 p-6 border rounded shadow w-full max-w-2xl bg-gray-50">
@@ -115,25 +138,6 @@ export default function Summary() {
           {error}
         </div>
       )}
-
-      <div className="flex gap-4 mt-6">
-        <button
-          onClick={() => router.push('/interview?edit=true')}
-          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {texts[lang].edit}
-        </button>
-
-        <button
-          onClick={() => {
-            sessionStorage.clear();
-            router.push('/');
-          }}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {texts[lang].startOver}
-        </button>
-      </div>
     </main>
   );
 }
