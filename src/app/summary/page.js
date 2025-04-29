@@ -95,7 +95,7 @@ export default function Summary() {
       )}
 
       {bio && (
-        <div className="mt-8 p-6 border rounded shadow w-full max-w-2xl bg-gray-50 overflow-y-auto" style={{ minHeight: '300px' }}>
+        <div className="mt-8 p-6 border rounded shadow w-full max-w-2xl bg-gray-50">
           <h2 className="text-2xl font-semibold mb-4">Your Story</h2>
           <p className="whitespace-pre-line">{bio}</p>
         </div>
