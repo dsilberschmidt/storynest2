@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import questions from '../questions';
 
 export default function Interview() {
@@ -10,18 +10,28 @@ export default function Interview() {
   const [answers, setAnswers] = useState([]);
   const [input, setInput] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    sessionStorage.removeItem('storynest_answers');
+    if (!searchParams.get('edit')) {
+      sessionStorage.removeItem('storynest_answers');
+    } else {
+      const savedAnswers = JSON.parse(sessionStorage.getItem('storynest_answers')) || [];
+      setAnswers(savedAnswers);
+      setInput(savedAnswers[0] || '');
+    }
   }, []);
 
   const handleNext = () => {
-    setAnswers([...answers, input]);
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = input;
+    setAnswers(updatedAnswers);
     setInput('');
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
+      setInput(updatedAnswers[currentQuestion + 1] || '');
     } else {
-      sessionStorage.setItem('storynest_answers', JSON.stringify([...answers, input]));
+      sessionStorage.setItem('storynest_answers', JSON.stringify(updatedAnswers));
       router.push('/summary');
     }
   };
@@ -30,7 +40,6 @@ export default function Interview() {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
       setInput(answers[currentQuestion - 1] || '');
-      setAnswers(answers.slice(0, -1));
     }
   };
 
