@@ -48,12 +48,16 @@ export default function Interview() {
       setShowIntro(false);
       return;
     }
-    setAnswers([...answers, input]);
+    if (input.trim() !== '') {
+      setAnswers([...answers, input]);
+    } else {
+      setAnswers([...answers]);
+    }
     setInput('');
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      sessionStorage.setItem('storynest_answers', JSON.stringify([...answers, input]));
+      sessionStorage.setItem('storynest_answers', JSON.stringify([...answers, input.trim() !== '' ? input : answers[currentQuestion]]));
       router.push('/summary');
     }
   };
