@@ -3,6 +3,7 @@
 
 let recognition;
 let listening = false;
+let originalButtonColor = null;
 
 export function initSpeechRecognition() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -13,39 +14,64 @@ export function initSpeechRecognition() {
   const recog = new SpeechRecognition();
   recog.lang = 'es-ES';
   recog.interimResults = false;
+  recog.continuous = false;
   recog.maxAlternatives = 1;
   return recog;
 }
 
-export function startListening(inputId = 'answer-input') {
+export function startListening(inputId = 'answer-input', buttonId = 'mic-button', setInput) {
   if (!recognition) {
     recognition = initSpeechRecognition();
     if (!recognition) return;
-    
+
+    recognition.onstart = () => {
+      console.log('🎙️ Reconocimiento de voz iniciado.');
+      const button = document.getElementById(buttonId);
+      if (button) {
+        originalButtonColor = button.style.backgroundColor;
+        button.style.backgroundColor = '#FF0000'; // rojo grabando
+      }
+      alert('🎙️ Micrófono activo, puedes empezar a hablar.');
+    };
+
+    recognition.onspeechstart = () => {
+      alert('🗣️ Se detectó que estás hablando.');
+    };
+
+    recognition.onspeechend = () => {
+      alert('🔇 Dejaste de hablar.');
+    };
+
+    recognition.onsoundstart = () => {
+      alert('🔊 Sonido detectado.');
+    };
+
+    recognition.onsoundend = () => {
+      alert('🔈 Fin del sonido.');
+    };
+
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
-      const inputField = document.getElementById(inputId);
-      if (inputField) {
-        inputField.value = speechResult;
-        const inputEvent = new Event('input', { bubbles: true });
-        inputField.dispatchEvent(inputEvent);
+      console.log('🎯 Voz capturada:', speechResult);
+      if (typeof setInput === 'function') {
+        setInput(speechResult);
       }
-      console.log('Texto reconocido:', speechResult);
+      alert('🎯 Texto capturado: "' + speechResult + '"');
     };
-    
+
     recognition.onerror = (event) => {
-      console.error('Error en reconocimiento:', event.error);
-      if (event.error === 'not-allowed') {
-        alert('⚠️ No se permitió el acceso al micrófono. Por favor habilita el permiso en configuración del navegador.');
-      }
-      if (event.error === 'network') {
-        alert('⚠️ No se pudo conectar al servicio de reconocimiento de voz. Verifica tu conexión o la configuración de tu navegador.');
-      }
+      console.error('❌ Error en reconocimiento:', event.error);
+      alert('❌ Error en reconocimiento: ' + event.error);
     };
-    
+
     recognition.onend = () => {
+      console.log('🎙️ Reconocimiento de voz terminado.');
       listening = false;
-      console.log('🎙️ Reconocimiento finalizado.');
+      const button = document.getElementById(buttonId);
+      if (button && originalButtonColor !== null) {
+        button.style.backgroundColor = originalButtonColor;
+      }
+      alert('✅ Grabación finalizada.');
     };
   }
 
@@ -55,8 +81,8 @@ export function startListening(inputId = 'answer-input') {
       listening = true;
       console.log('🎙️ Escuchando...');
     } catch (error) {
-      console.error('Error al iniciar reconocimiento:', error);
-      alert('⚠️ No se pudo iniciar el reconocimiento de voz. Verifica permisos o conexión.');
+      console.error('❌ Error al iniciar reconocimiento:', error);
+      alert('❌ Error al iniciar reconocimiento: ' + error.message);
     }
   }
 }

@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { startListening } from './speech';
 import questions from '../questions';
 
 export default function Interview() {
@@ -33,15 +32,16 @@ export default function Interview() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         rows={4}
-        placeholder="Write your answer here or use your voice..."
+        placeholder="Write your answer here..."
       />
 
       <div className="flex gap-4 mb-4">
         <button
-          onClick={() => startListening('answer-input')}
-          className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+          id="mic-button"
+          disabled
+          className="bg-gray-400 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed"
         >
-          🎙️ Hablar
+          🎙️ Voice Input Coming Soon
         </button>
 
         <button
