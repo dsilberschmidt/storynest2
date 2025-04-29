@@ -26,6 +26,14 @@ export default function Interview() {
     }
   };
 
+  const handleBack = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+      setInput(answers[currentQuestion - 1] || '');
+      setAnswers(answers.slice(0, -1));
+    }
+  };
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4">
       <h2 className="text-2xl font-semibold mb-6">{questions[currentQuestion]}</h2>
@@ -40,6 +48,14 @@ export default function Interview() {
       />
 
       <div className="flex gap-4 mb-4">
+        <button
+          onClick={handleBack}
+          disabled={currentQuestion === 0}
+          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+        >
+          🔙 Back
+        </button>
+
         <button
           id="mic-button"
           disabled
