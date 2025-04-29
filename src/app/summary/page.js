@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import questions from '../questions';
 
 export default function Summary() {
   const [answers, setAnswers] = useState([]);
@@ -21,7 +22,7 @@ export default function Summary() {
   const generateBiography = async () => {
     console.log('⏳ Empezando generación de biografía');
     console.log('🔑 API Key:', apiKey ? '[ok]' : '[missing]');
-    setBio(''); // Limpiar historia vieja
+    setBio('');
     setLoading(true);
     setError(null);
     try {
@@ -68,7 +69,7 @@ export default function Summary() {
         <div className="w-full max-w-md space-y-4 mb-6">
           {answers.map((answer, index) => (
             <div key={index} className="p-4 border rounded shadow">
-              <h2 className="text-lg font-semibold mb-2">Question {index + 1}</h2>
+              <h2 className="text-lg font-semibold mb-2">{questions[index]}</h2>
               <p>{answer}</p>
             </div>
           ))}
@@ -93,7 +94,7 @@ export default function Summary() {
 
       {bio && (
         <>
-          <div className="mt-8 p-6 border rounded shadow max-w-md bg-gray-50">
+          <div className="mt-8 p-6 border rounded shadow w-full max-w-2xl bg-gray-50 overflow-auto" style={{ maxHeight: '500px' }}>
             <h2 className="text-2xl font-semibold mb-4">Your Story</h2>
             <p className="whitespace-pre-line">{bio}</p>
           </div>
