@@ -98,12 +98,24 @@ export default function Summary() {
             <p className="whitespace-pre-line">{bio}</p>
           </div>
 
-          <button
-            onClick={() => router.push('/')}
-            className="mt-6 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Back to Home
-          </button>
+          <div className="flex gap-4 mt-6">
+            <button
+              onClick={() => router.push('/interview')}
+              className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+            >
+              🔙 Back to Interview
+            </button>
+
+            <button
+              onClick={() => {
+                sessionStorage.clear();
+                router.push('/');
+              }}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              🆕 Start New Interview
+            </button>
+          </div>
         </>
       )}
     </main>
