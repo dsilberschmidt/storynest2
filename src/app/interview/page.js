@@ -6,18 +6,21 @@ import { useRouter } from 'next/navigation';
 import questionsES from '../../i18n/questions_es';
 import questionsEN from '../../i18n/questions_en';
 import questionsPT from '../../i18n/questions_pt';
+import texts from '../../i18n/texts';
 
 export default function Interview() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [input, setInput] = useState('');
   const [questions, setQuestions] = useState([]);
+  const [lang, setLang] = useState('en');
   const router = useRouter();
 
   useEffect(() => {
-    const lang = sessionStorage.getItem('storynest_language') || 'en';
-    if (lang === 'es') setQuestions(questionsES);
-    else if (lang === 'pt') setQuestions(questionsPT);
+    const selectedLang = sessionStorage.getItem('storynest_language') || 'en';
+    setLang(selectedLang);
+    if (selectedLang === 'es') setQuestions(questionsES);
+    else if (selectedLang === 'pt') setQuestions(questionsPT);
     else setQuestions(questionsEN);
   }, []);
 
@@ -45,14 +48,14 @@ export default function Interview() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         rows={4}
-        placeholder="Escribe tu respuesta aquí..."
+        placeholder={texts[lang].writeHere}
       />
 
       <button
         onClick={handleNext}
         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
       >
-        {currentQuestion < questions.length - 1 ? 'Next' : 'Finish'}
+        {currentQuestion < questions.length - 1 ? texts[lang].next : texts[lang].finish}
       </button>
     </main>
   );
