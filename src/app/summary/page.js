@@ -46,7 +46,7 @@ export default function Summary() {
           messages: [
             {
               role: 'system',
-              content: "You are a professional biographer. Write a concise, realistic life story based strictly on the user's memories listed below. Do not invent or exaggerate facts. Organize the memories naturally into a biography. Use simple, factual language. Do not add fictional chapters or epilogues."
+              content: "You are a professional biographer. Based on the user's memories, write a concise and realistic life story in the third person. The tone should be warm, affectionate, and natural, as if leaving a beautiful memory for future generations. Do not invent new facts. Connect the memories in a meaningful and heartfelt way."
             },
             {
               role: 'user',
