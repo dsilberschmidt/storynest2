@@ -46,7 +46,7 @@ export default function Summary() {
           messages: [
             {
               role: 'system',
-              content: 'You are a helpful storyteller. Write a beautiful life story based on the following memories.'
+              content: 'You are a helpful biographer. Write a realistic, emotionally touching biography based only on the user's memories. Do not invent new facts. Be authentic and natural, as if telling the real story of a person's life.'
             },
             {
               role: 'user',
