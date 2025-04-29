@@ -109,9 +109,9 @@ export default function Summary() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-3xl font-bold mb-6">{texts[lang].thankYou}</h1>
-
       <NavigationButtons />
+
+      <h2 className="text-2xl font-semibold mb-6">Transcripción de tu entrevista</h2>
 
       {answers.length > 0 && questions.length > 0 && (
         <div className="w-full max-w-md mb-6">
