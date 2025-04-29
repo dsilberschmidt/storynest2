@@ -108,7 +108,7 @@ export default function Interview() {
         <>
           <h2 className="text-2xl font-semibold mb-6 text-center">
             {lang === 'es' && '¡Hola! Soy Amanda, tu biógrafa personal.'}
-            {lang === 'en' && 'Hi! I'm Amanda, your personal biographer.'}
+            {lang === 'en' && "Hi! I'm Amanda, your personal biographer."}
             {lang === 'pt' && 'Oi! Sou Amanda, sua biógrafa pessoal.'}
           </h2>
           <button
