@@ -35,9 +35,9 @@ export default function Interview() {
       const isEditing = searchParams.get('edit') === 'true';
       if (isEditing) {
         const savedAnswers = JSON.parse(sessionStorage.getItem('storynest_answers')) || [];
-        setAnswers(savedAnswers.slice(0, -1));
-        setInput(savedAnswers[savedAnswers.length - 1] || '');
-        setCurrentQuestion(savedAnswers.length - 1);
+        setAnswers(savedAnswers);
+        setInput(savedAnswers[0] || '');
+        setCurrentQuestion(0);
         setShowIntro(false);
       }
     }
@@ -48,16 +48,21 @@ export default function Interview() {
       setShowIntro(false);
       return;
     }
+
+    const updatedAnswers = [...answers];
     if (input.trim() !== '') {
-      setAnswers([...answers, input]);
-    } else {
-      setAnswers([...answers]);
+      updatedAnswers[currentQuestion] = input;
+    } else if (!updatedAnswers[currentQuestion]) {
+      updatedAnswers[currentQuestion] = '';
     }
+    setAnswers(updatedAnswers);
     setInput('');
+
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
+      setInput(updatedAnswers[currentQuestion + 1] || '');
     } else {
-      sessionStorage.setItem('storynest_answers', JSON.stringify([...answers, input.trim() !== '' ? input : answers[currentQuestion]]));
+      sessionStorage.setItem('storynest_answers', JSON.stringify(updatedAnswers));
       router.push('/summary');
     }
   };
@@ -66,7 +71,6 @@ export default function Interview() {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
       setInput(answers[currentQuestion - 1] || '');
-      setAnswers(answers.slice(0, -1));
     }
   };
 
