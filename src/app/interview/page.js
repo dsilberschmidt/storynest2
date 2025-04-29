@@ -47,7 +47,7 @@ export default function Interview() {
         placeholder="Write your answer here..."
       />
 
-      <div className="flex gap-4 mb-4">
+      <div className="flex gap-4 mb-4 flex-wrap justify-center">
         <button
           onClick={handleBack}
           disabled={currentQuestion === 0}
@@ -69,6 +69,16 @@ export default function Interview() {
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
         >
           {currentQuestion < questions.length - 1 ? 'Next' : 'Finish'}
+        </button>
+
+        <button
+          onClick={() => {
+            sessionStorage.clear();
+            router.push('/');
+          }}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          🆕 Start New Interview
         </button>
       </div>
     </main>
