@@ -14,9 +14,8 @@ export default function Interview() {
   const [input, setInput] = useState('');
   const [questions, setQuestions] = useState([]);
   const [lang, setLang] = useState('en');
+  const [isTestMode, setIsTestMode] = useState(false);
   const router = useRouter();
-
-  const isTestMode = typeof window !== 'undefined' && sessionStorage.getItem('storynest_test') === 'true';
 
   useEffect(() => {
     const selectedLang = sessionStorage.getItem('storynest_language') || 'en';
@@ -24,6 +23,9 @@ export default function Interview() {
     if (selectedLang === 'es') setQuestions(questionsES);
     else if (selectedLang === 'pt') setQuestions(questionsPT);
     else setQuestions(questionsEN);
+
+    const test = localStorage.getItem('storynest_test') === 'true';
+    setIsTestMode(test);
   }, []);
 
   const handleNext = () => {
