@@ -42,6 +42,7 @@ export default function Summary() {
         },
         body: JSON.stringify({
           model: 'gpt-4-turbo',
+          max_tokens: 1500,
           messages: [
             {
               role: 'system',
