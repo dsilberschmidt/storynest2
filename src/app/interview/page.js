@@ -70,17 +70,17 @@ export default function Interview() {
         >
           {currentQuestion < questions.length - 1 ? 'Next' : 'Finish'}
         </button>
-
-        <button
-          onClick={() => {
-            sessionStorage.clear();
-            router.push('/');
-          }}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          🆕 Start New Interview
-        </button>
       </div>
+
+      <button
+        onClick={() => {
+          sessionStorage.clear();
+          router.push('/');
+        }}
+        className="text-sm text-red-500 underline mt-4"
+      >
+        🆕 Start New Interview
+      </button>
     </main>
   );
 }
