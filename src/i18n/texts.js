@@ -1,4 +1,3 @@
-
 const texts = {
   es: {
     next: "Siguiente",
@@ -10,7 +9,8 @@ const texts = {
     thankYou: "¡Gracias por compartir tu historia!",
     writeHere: "Escribe tu respuesta aquí...",
     back: "⬅️ Atrás",
-    newInterview: "🆕 Nueva Entrevista"
+    newInterview: "🆕 Nueva Entrevista",
+    voiceComingSoon: "Grabar con voz (próximamente)"
   },
   en: {
     next: "Next",
@@ -22,7 +22,8 @@ const texts = {
     thankYou: "Thank you for sharing your story!",
     writeHere: "Write your answer here...",
     back: "⬅️ Back",
-    newInterview: "🆕 New Interview"
+    newInterview: "🆕 New Interview",
+    voiceComingSoon: "Record with voice (coming soon)"
   },
   pt: {
     next: "Próximo",
@@ -34,7 +35,8 @@ const texts = {
     thankYou: "Obrigado por compartilhar sua história!",
     writeHere: "Escreva sua resposta aqui...",
     back: "⬅️ Voltar",
-    newInterview: "🆕 Nova Entrevista"
+    newInterview: "🆕 Nova Entrevista",
+    voiceComingSoon: "Gravar com voz (em breve)"
   }
 };
 

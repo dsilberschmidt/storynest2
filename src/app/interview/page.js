@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -184,12 +183,22 @@ export default function Interview() {
           <h2 className="text-2xl font-semibold mb-6 text-center">{questions[currentQuestion]}</h2>
 
           <textarea
-            className="border p-2 w-full max-w-md mb-4"
+            className="border p-2 w-full max-w-md mb-2"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             rows={4}
             placeholder={texts[lang].writeHere}
           />
+
+          <div className="mb-4">
+            <button
+              disabled
+              className="mt-2 px-3 py-1 text-sm rounded bg-gray-300 text-gray-600 cursor-not-allowed"
+              title={texts[lang].voiceComingSoon}
+            >
+              🎙️ {texts[lang].voiceComingSoon}
+            </button>
+          </div>
 
           <div className="flex gap-4">
             {currentQuestion > 0 && (
