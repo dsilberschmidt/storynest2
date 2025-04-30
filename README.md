@@ -1,3 +1,14 @@
+## 🧪 Experimental Branch: voice-experiment
+
+We explored voice input with AIMLAPI using the Whisper model in a separate branch: [`voice-experiment`](https://github.com/tuusuario/storynest2/tree/voice-experiment)
+
+### Current status:
+- Audio recording and upload via MediaRecorder works
+- AIMLAPI currently rejects audio/webm with 400 errors
+- Further integration would require format conversion (e.g., with ffmpeg)
+
+This branch is **not part of the submitted MVP**, but documents technical exploration for future features.
+
 # StoryNest
 
 StoryNest is a mobile-first web app that captures life stories through guided digital interviews and generates beautiful AI-assisted biographies.
