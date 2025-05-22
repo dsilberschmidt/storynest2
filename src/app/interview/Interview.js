@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import questionsES from '../../i18n/questions_es';
 import questionsEN from '../../i18n/questions_en';
@@ -15,6 +15,9 @@ export default function Interview() {
   const [lang, setLang] = useState('en');
   const [isTestMode, setIsTestMode] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
+  const [isListening, setIsListening] = useState(false);
+  const [micError, setMicError] = useState('');
+  const recognitionRef = useRef(null);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -190,14 +193,29 @@ export default function Interview() {
             placeholder={texts[lang].writeHere}
           />
 
-          <div className="mb-4">
+  <div className="flex flex-col items-center mb-4">
             <button
-              disabled
-              className="mt-2 px-3 py-1 text-sm rounded bg-gray-300 text-gray-600 cursor-not-allowed"
-              title={texts[lang].voiceComingSoon}
+      onClick={() => handleMicClick()}
+      className={`mt-2 px-4 py-2 text-base rounded-md font-semibold transition-colors duration-150 ${
+        isListening 
+          ? 'bg-red-500 hover:bg-red-700 text-white' 
+          : micError 
+          ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
+          : 'bg-blue-500 hover:bg-blue-700 text-white'
+      }`}
+      title={isListening ? texts[lang].stopListening : texts[lang].startListening}
             >
-              🎙️ {texts[lang].voiceComingSoon}
+      <span role="img" aria-label={isListening ? "stop" : "microphone"} className="mr-2">
+        {isListening ? '🖐️' : '🎙️'}
+      </span>
+      {isListening
+        ? texts[lang].listening
+        : micError
+        ? texts[lang].tryAgain // Placeholder, will be 'Try Again'
+        : texts[lang].speakNow // Placeholder, will be 'Speak Now' or 'Use Microphone'
+      }
             </button>
+    {micError && <p className="text-red-500 text-xs mt-2 text-center">{micError}</p>}
           </div>
 
           <div className="flex gap-4">

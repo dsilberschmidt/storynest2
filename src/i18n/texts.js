@@ -10,7 +10,18 @@ const texts = {
     writeHere: "Escribe tu respuesta aquí...",
     back: "⬅️ Atrás",
     newInterview: "🆕 Nueva Entrevista",
-    voiceComingSoon: "Grabar con voz (próximamente)"
+    // New speech recognition texts
+    listening: "Escuchando...",
+    speakNow: "🎤 Habla Ahora",
+    tryAgain: "🎤 Intenta de Nuevo",
+    startListening: "Empezar a Grabar",
+    stopListening: "Dejar de Grabar",
+    speechRecognitionNotSupported: "El reconocimiento de voz no es compatible con este navegador.",
+    micPermissionDenied: "Acceso al micrófono denegado. Por favor, permite el acceso en la configuración de tu navegador.",
+    speechErrorNoSpeech: "No se detectó voz. Asegúrate de que el micrófono esté activado y habla claramente.",
+    speechErrorAudioCapture: "Problema con el micrófono. Revisa la conexión y los permisos del micrófono.",
+    speechErrorNetwork: "Error de red durante el reconocimiento de voz. Revisa tu conexión a internet.",
+    speechErrorUnknown: "Ocurrió un error desconocido durante el reconocimiento de voz. Inténtalo de nuevo."
   },
   en: {
     next: "Next",
@@ -23,7 +34,18 @@ const texts = {
     writeHere: "Write your answer here...",
     back: "⬅️ Back",
     newInterview: "🆕 New Interview",
-    voiceComingSoon: "Record with voice (coming soon)"
+    // New speech recognition texts
+    listening: "Listening...",
+    speakNow: "🎤 Speak Now",
+    tryAgain: "🎤 Try Again",
+    startListening: "Start Recording",
+    stopListening: "Stop Recording",
+    speechRecognitionNotSupported: "Speech recognition is not supported in this browser.",
+    micPermissionDenied: "Microphone access denied. Please allow microphone access in your browser settings.",
+    speechErrorNoSpeech: "No speech was detected. Make sure your microphone is enabled and speak clearly.",
+    speechErrorAudioCapture: "Microphone problem. Please check your microphone connection and permissions.",
+    speechErrorNetwork: "Network error during speech recognition. Please check your internet connection.",
+    speechErrorUnknown: "An unknown speech error occurred. Please try again."
   },
   pt: {
     next: "Próximo",
@@ -36,7 +58,18 @@ const texts = {
     writeHere: "Escreva sua resposta aqui...",
     back: "⬅️ Voltar",
     newInterview: "🆕 Nova Entrevista",
-    voiceComingSoon: "Gravar com voz (em breve)"
+    // New speech recognition texts
+    listening: "Ouvindo...",
+    speakNow: "🎤 Fale Agora",
+    tryAgain: "🎤 Tente Novamente",
+    startListening: "Começar a Gravar",
+    stopListening: "Parar de Gravar",
+    speechRecognitionNotSupported: "O reconhecimento de voz não é suportado neste navegador.",
+    micPermissionDenied: "Acesso ao microfone negado. Por favor, permita o acesso nas configurações do seu navegador.",
+    speechErrorNoSpeech: "Nenhuma fala foi detectada. Certifique-se de que seu microfone está ativado e fale claramente.",
+    speechErrorAudioCapture: "Problema com o microfone. Verifique a conexão e as permissões do microfone.",
+    speechErrorNetwork: "Erro de rede durante o reconhecimento de voz. Verifique sua conexão com a internet.",
+    speechErrorUnknown: "Ocorreu um erro desconhecido durante o reconhecimento de voz. Tente novamente."
   }
 };
 
